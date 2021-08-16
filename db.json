@@ -1,7 +1,11 @@
 {
-    "QuestionId": 1,
-    "QuestionUser":  "Programmer",
-    "QuestionTitle": "Why my code doesnt work?",
-    "QuestionDescripcion": "Hello I got this code but it doesnt work",
-	"QuestionAnswer": { "AnswerId": 1, "AnswerUser": "The best", "AnswerDescription": "Your problem is this"}
+  "QuestionId": 1,
+  "QuestionUser": "Programmer",
+  "QuestionTitle": "Why my code doesnt work?",
+  "QuestionDescripcion": "Hello I got this code but it doesnt work",
+  "QuestionAnswer": {
+    "AnswerId": 1,
+    "AnswerUser": "The best",
+    "AnswerDescription": "Your problem is this"
+  }
 }
