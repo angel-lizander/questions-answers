@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=Mgo
+    volumes:
+      - ./back-end/mongo-volume:/data/db
+      - ./back-end/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+  app:
+    build: ./back-end
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+  front-end:
+    build:
+      context: ./front-end
+    volumes:
+      - ./front-end/src:/frontend/src
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
