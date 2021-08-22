@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "60bda584-972a-44a2-9881-109a69930b24",
+		"name": "QuestionsAnswers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ABCDEFG",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"QuestionUser\": \"Programmer\",\n    \"QuestionTitle\": \"Why my code doesnt work?\",\n    \"QuestionDescripcion\": \"Hello I got this code but it doesnt work\",\n    \"QuestionAnswer\": {\n        \"AnswerId\": 1,\n        \"AnswerUser\": \"The best\",\n        \"AnswerDescription\": \"Your problem is this\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/questions/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ABCDEFG",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/questions/611a9e140197e2010eeb74aa",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						"611a9e140197e2010eeb74aa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ABCDEFG",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"QuestionAnswer\": {\n        \"AnswerUser\": \"The bessssst\",\n        \"AnswerDescription\": \"Your problem is this\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/questions/61226ec419f2a927c3bc1f0b",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						"61226ec419f2a927c3bc1f0b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ABCDEFG",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/questions/?q={\"QuestionUser\":\"TherUser123\"}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{\"QuestionUser\":\"TherUser123\"}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
