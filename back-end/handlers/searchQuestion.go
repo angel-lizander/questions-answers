@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/angel-lizander/questions-answers/database"
-
 	"github.com/gin-gonic/gin"
 )
 
