@@ -48,8 +48,6 @@ const Details = ({ handleClose, Open, Id }: DetailsInterface) => {
             }
         };
 
-        console.log(parameters)
-
         PUT({ url: 'http://localhost:8080/questions/' + Id, parameters: parameters }).then(response => response.success ? handleClose() : "")
 
 
@@ -70,7 +68,7 @@ const Details = ({ handleClose, Open, Id }: DetailsInterface) => {
                         User
                     </Grid>
                     <Grid item lg={4}>
-                        {data && data.QuestionUser}
+                        {data && data.Question.QuestionUser}
                     </Grid>
                 </Grid>
             </Grid>
@@ -80,7 +78,7 @@ const Details = ({ handleClose, Open, Id }: DetailsInterface) => {
                         Title
                     </Grid>
                     <Grid item lg={4}>
-                        {data && data.QuestionTitle}
+                        {data && data.Question.QuestionTitle}
                     </Grid>
                 </Grid>
             </Grid>
@@ -90,7 +88,7 @@ const Details = ({ handleClose, Open, Id }: DetailsInterface) => {
                         Description
                     </Grid>
                     <Grid item lg={4}>
-                        {data && data.QuestionDescription}
+                        {data && data.Question.QuestionDescription}
                     </Grid>
                 </Grid>
             </Grid>
@@ -110,7 +108,7 @@ const Details = ({ handleClose, Open, Id }: DetailsInterface) => {
                         rows="5"
                         variant="outlined"
                         id="additional-info"
-                        defaultValue={data?.QuestionAnswer.AnswerDescription}
+                        defaultValue={data?.Question.QuestionAnswer.AnswerDescription}
                         name="AnswerDescription"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     />

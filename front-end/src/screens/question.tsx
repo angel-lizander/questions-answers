@@ -101,7 +101,7 @@ function Questions() {
             </Button>
           </Grid>
           <List className={classes.list}>
-            {data && data.map((data: Question) => (
+            {data && data.Questions.map((data: Question) => (
               <React.Fragment key={data.id}>
                 <ListItem button onClick={() => toggleModal(data.id)}>
                   <ListItemAvatar>
