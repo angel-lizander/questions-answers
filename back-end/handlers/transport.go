@@ -3,7 +3,9 @@ package handlers
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/angel-lizander/questions-answers/database"
@@ -18,6 +20,11 @@ func MakeInsertEndpoint(s database.QuestionInterface) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(CreateQuestionRequest)
 		resp, err := s.Insert(req.question)
+
+		if err != nil {
+			return GetQuestionResponse{Err: err}, nil
+		}
+
 		return CreateQuestionResponse{Question: resp, Err: err}, nil
 	}
 
@@ -26,7 +33,18 @@ func MakeInsertEndpoint(s database.QuestionInterface) endpoint.Endpoint {
 func MakeUpdateEndpoint(s database.QuestionInterface) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(UpdateQuestionRequest)
+
+		if req.ID == "" {
+			return GetQuestionResponse{Err: errors.New("Parameter ID is required ")}, nil
+
+		}
+
 		resp, err := s.Update(req.ID, req.question)
+
+		if err != nil {
+			return GetQuestionResponse{Err: err}, nil
+		}
+
 		return UpdateQuestionResponse{Question: resp, Err: err}, nil
 	}
 
@@ -77,6 +95,11 @@ func MakeDeleteEndpoint(s database.QuestionInterface) endpoint.Endpoint {
 		req := request.(GetQuestionByIdRequest)
 
 		resp, err := s.Delete(req.id)
+
+		if resp.DeletedCount == 0 {
+			return DeleteQuestionResponse{Err: errors.New("Parameter ID no found")}, nil
+
+		}
 
 		if err != nil {
 			return DeleteQuestionResponse{Err: err}, nil
@@ -139,43 +162,8 @@ func DecodeUpdateRequest(_ context.Context, r *http.Request) (interface{}, error
 	return req, nil
 }
 
-/*func decodeGetUserByIdRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var req GetUserByIdRequest
-	vars := mux.Vars(r)
-	req = GetUserByIdRequest{
-		Id: vars["id"],
-	}
-
-	return req, nil
-}
-
-func decodeGetAllUsersRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var req GetAllUsersRequest
-
-	return req, nil
-}
-
-func decodeDeleteUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var req DeleteUserRequest
-	vars := mux.Vars(r)
-	req = DeleteUserRequest{
-		Id: vars["id"],
-	}
-
-	return req, nil
-}
-
-func decodeUpdateUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var req UpdateUserRequest
-	if err := json.NewDecoder(r.Body).Decode(&req.user); err != nil {
-		return nil, err
-	}
-	return req, nil
-
-}*/
-
-//  encodes the output
 func EncodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+	log.Println("THIS IS THE RESPONDE", response)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	return json.NewEncoder(w).Encode(response)
 }
